@@ -37,6 +37,7 @@ function setup()
 }
 
 function adduser(){
+wget -P ./modules/ https://raw.githubusercontent.com/BlackFalconBot/FalconPi/master/modules/adduser.sh
 echo "${GREEN}Adding User $FalconName ${RESET}"
 /bin/bash ./modules/adduser.sh -a add $FalconName $Password
 echo "${GREEN}Adding User $FalconName to Sudoers List ${RESET}"
