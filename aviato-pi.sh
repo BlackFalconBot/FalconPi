@@ -47,10 +47,10 @@ hash python3-pip 2>/dev/null || { echo >&2 "Run Setup Script Once.  Aborting."; 
 hash ansi2html 2>/dev/null || { echo >&2 "Run Setup Script Once.  Aborting."; exit 1; }
 hash ccze 2>/dev/null || { echo >&2 "Run Setup Script Once.  Aborting."; exit 1; }
 FILE=nmap-bootstrap.xsl
-if [[ -f "$FILE" ]]; then
-    echo "$FILE exist"
+if [[ ! -f "$FILE" ]]; then
+    wget https://raw.githubusercontent.com/BlackFalconBot/FalconPi/master/nmap-bootstrap.xsl
 else
-    exit 1
+    echo "$FILE exist"
 fi
 
 }
@@ -336,7 +336,7 @@ while MENU && read -e -p "Select the desired options using their number (again t
 done
 
 #Starts from here
-
+test
 banner
 echo "${BLUE}[+] Don't forget to run it under screen ... ${RESET}"
 read -p "${RED}Enter the Project Name : ${RESET}" name
