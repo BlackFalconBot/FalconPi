@@ -24,6 +24,17 @@ function trap_ctrlc ()
 }
 trap "trap_ctrlc" 2 
 
+function test(){
+falconmodules=modules/
+if [[ ! -d "$falconmodules" ]]; then
+    echo "${RED} $falconmodules Directory Not Exist ${RESET}"
+    wget -P ./modules/ https://raw.githubusercontent.com/BlackFalconBot/FalconPi/master/modules/adduser.sh
+elif [ -d "$falconmodules" ]
+then 
+    echo "All Good"
+fi
+}
+
 function setup()
 {
 	read -p "${RED}Enter FalconPool Unit Name : ${RESET}" FalconName
@@ -104,6 +115,7 @@ sudo systemctl status --no-pager rc-local.service
 echo "${GREEN}ssh $FalconName@$cncip -p $FUID ${RESET}"
 }
 
+test
 setup
 adduser
 installer
