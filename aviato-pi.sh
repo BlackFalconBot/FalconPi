@@ -43,7 +43,7 @@ trap "trap_ctrlc" 2
 
 test(){
 hash xsltproc 2>/dev/null || { echo >&2 "Run Setup Script Once.  Aborting."; exit 1; }
-hash python3-pip 2>/dev/null || { echo >&2 "Run Setup Script Once.  Aborting."; exit 1; }
+hash pip3 2>/dev/null || { echo >&2 "Run Setup Script Once.  Aborting."; exit 1; }
 hash ansi2html 2>/dev/null || { echo >&2 "Run Setup Script Once.  Aborting."; exit 1; }
 hash ccze 2>/dev/null || { echo >&2 "Run Setup Script Once.  Aborting."; exit 1; }
 FILE=nmap-bootstrap.xsl
