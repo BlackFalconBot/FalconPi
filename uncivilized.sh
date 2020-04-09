@@ -28,10 +28,10 @@ function test(){
 falconmodules=modules/
 if [[ ! -d "$falconmodules" ]]; then
     echo "${RED} $falconmodules Directory Not Exist ${RESET}"
-    mkdir modules && wget -O modules/adduser.sh https://raw.githubusercontent.com/BlackFalconBot/FalconPi/master/modules/adduser.sh && chmod +x ./modules/adduser.sh 
+    wget -P ./modules/ https://raw.githubusercontent.com/BlackFalconBot/FalconPi/master/modules/adduser.sh
 elif [ -d "$falconmodules" ]
 then 
-    echo "Modules Directory Exist"
+    echo "All Good"
 fi
 }
 
