@@ -25,11 +25,11 @@ echo -e "${GREEN}[+] Setting things up.${RESET}"
     sudo apt install python3-pip -y 
     sudo apt install php -y 
     sudo apt install python-pip -y   
-    sudo pip install ansi2html
+    sudo pip3 install ansi2html
     sudo apt install ccze -y
     sudo apt-get install nmap -y
-    sudo pip install python-libnmap
-    sudo pip install XlsxWriter
+    sudo pip3 install python-libnmap
+    sudo pip3 install XlsxWriter
     wget https://raw.githubusercontent.com/mrschyte/nmap-converter/master/nmap-converter.py
     chmod +x nmap-converter.py
   	FILE=directory-list.zip
