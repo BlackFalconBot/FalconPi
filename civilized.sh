@@ -37,9 +37,9 @@ fi
 
 function setup()
 {
-	read -p "${RED}Enter FalconPool Unit Name : ${RESET}" FalconName
+	read -p "${RED}Enter FalconPool Unit Name (user will be created in this host by this name): ${RESET}" FalconName
 	read -p "${RED}Enter FalconPool Unit Password : ${RESET}" Password
-	read -p "${RED}Enter Falcon Unique ID :${RESET} " FUID
+	read -p "${RED}Enter Falcon Unique ID (Port number for Remote SSH Tunneling):${RESET} " FUID
 	if ! [[ "$FUID" =~ ^[0-9]+$ ]]
     		then
         		echo "Sorry integers only"
@@ -48,7 +48,7 @@ function setup()
 }
 
 function adduser(){
-wget -P ./modules/ https://raw.githubusercontent.com/BlackFalconBot/FalconPi/master/modules/adduser.sh
+#wget -P ./modules/ https://raw.githubusercontent.com/BlackFalconBot/FalconPi/master/modules/adduser.sh
 echo "${GREEN}Adding User $FalconName ${RESET}"
 /bin/bash ./modules/adduser.sh -a add $FalconName $Password
 echo "${GREEN}Adding User $FalconName to Sudoers List ${RESET}"
@@ -58,8 +58,9 @@ echo "${GREEN}Generating SSH Keys ${RESET}"
 ssh-keygen
 echo "${GREEN}RSA Key Generated Successfully${RESET}"
 read -p "${RED}Enter CnC User  : ${RESET}" cncuser
-read -p "${RED}Enter Cnc Server IP : ${RESET}" cncip
-ssh-copy-id $cncuser@$cncip
+read -p "${RED}Enter CnC Server IP : ${RESET}" cncip
+read -p "${RED}Enter CnC Server Port : ${RESET}" cncport
+ssh-copy-id -p $cncport $cncuser@$cncip
 echo "${GREEN}DONE ${RESET}"
 }
 
@@ -105,7 +106,7 @@ read -p "${RED}Enter Monitoring Port : ${RESET}" mp
 echo "${GREEN}Setting up autossh ${RESET}"
 cat > /etc/rc.local << EOF
 #!/bin/bash -e
-autossh -M $mp -fN -o "PubkeyAuthentication=yes" -o "StrictHostKeyChecking=false" -o "PasswordAuthentication=no" -o "ServerAliveInterval 60" -o "ServerAliveCountMax 3" -R $FUID:localhost:22 -i /root/.ssh/id_rsa $cncuser@$cncip &
+autossh -M $mp -fN -o "PubkeyAuthentication=yes" -o "StrictHostKeyChecking=false" -o "PasswordAuthentication=no" -o "ServerAliveInterval 60" -o "ServerAliveCountMax 3" -R $FUID:localhost:22 -i /root/.ssh/id_rsa $cncuser@$cncip -p $cncport &
 exit 0
 EOF
 
